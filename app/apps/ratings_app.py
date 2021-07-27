@@ -13,10 +13,12 @@ def app():
         with st.form("Annotator's name"):
             ann_name = st.text_input("Annotator's name")
             submitted_name = st.form_submit_button('Submit name')
-        main_path = './data'
-        with st.form("Main path"):
-            main_dl_path = st.text_input("Downloads folder path")
-            submitted_path = st.form_submit_button('Submit')
+            
+        main_path = '/content/drive/MyDrive/data'
+        main_dl_path = '/content/drive/MyDrive'
+        #with st.form("Main path"):
+            #main_dl_path = st.text_input("Downloads folder path")
+            #submitted_path = st.form_submit_button('Submit')
 
         with st.form('Brand'):
             brands_list = ["Ballantynes", "Myers", "David Jones", "Farfetch"]
