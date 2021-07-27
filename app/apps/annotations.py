@@ -78,11 +78,11 @@ def app():
             #attributes_and_col.write(attribute)
             options = list(data[category][index][attribute])[:-2]
             if count < 7: #write in column 2
-                tag = attributes_and_tags_col1.selectbox(attribute, options, key=count)
+                tag = attributes_and_tags_col1.selectbox(attribute, options, key=str(count))
             elif 7 < count < 15: #write in column 3
-                tag = attributes_and_tags_col2.selectbox(attribute, options, key=count)
+                tag = attributes_and_tags_col2.selectbox(attribute, options, key=str(count))
             else: #write in column 4
-                tag = attributes_and_tags_col3.selectbox(attribute, options, key=count)
+                tag = attributes_and_tags_col3.selectbox(attribute, options, key=str(count))
             tags_temp_list.append(tag)
             count += 1
 
