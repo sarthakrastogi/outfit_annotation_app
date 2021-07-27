@@ -49,8 +49,8 @@ def app():
 
     from PIL import Image
     import glob
-    path = 'Okkular\\apps\\images'
-    images = glob.glob(path + '\*')
+    path = '/content/drive/MyDrive/images'
+    images = glob.glob(path + '/*')
     #index = int(st.number_input('Index'))
     #st.write(images[0])
 
