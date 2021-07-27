@@ -27,9 +27,6 @@ def app():
             submitted_ind = st.form_submit_button('Submit')
             if submitted_ind:
                 pass
-            #if st.sidebar.button('Load data'):
-                #pass #load_data()
-
 
     #DATA CLEANING
     if 'editable' in data[category][index]:
@@ -96,13 +93,12 @@ def app():
             final_result = {category: penultimate_result}
             st.header("Result:")
             st.write(final_result)
-            #image_filename = "xyz" #later find a way to get image filename
             j_filename = image_filename + ".json"
             with open('/content/drive/MyDrive/annotations.txt', 'a') as f:
                 f.write(str({j_filename:final_result}))
-                #json.dump(final_result, f)
-            if st.button('Upload to Bucket'):
-                s3 = boto3.resource('s3')
-                s3.create_bucket(Bucket= 'pog-dataset')
-                s3.Object('pog-dataset','annotations.txt').upload_file(Filename='annotations.txt')
-                st.success("Saved annotations for the image " + image_filename + " as corresponding to " + j_filename)
+                st.success('Annotations for '+ j_filename + ' have been saved successfully in MyDrive/annotations.txt')
+            #if st.button('Upload to Bucket'):
+                #s3 = boto3.resource('s3')
+                #s3.create_bucket(Bucket= 'pog-dataset')
+                #s3.Object('pog-dataset','annotations.txt').upload_file(Filename='annotations.txt')
+                #st.success("Saved annotations for the image " + image_filename + " as corresponding to " + j_filename)
