@@ -73,13 +73,13 @@ def app():
                 col3.write('Corrupted image!')
         except IndexError:
             pass
-
+    ratings_file_path = main_dl_path+"/"+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt"
     with st.form('Rate this outfit out of 10:'):
         outfit_types_list = ["Dress", "Jeans-top"]
         rating = col0.selectbox("Rating", range(1, 11))
         submitted_rating = st.form_submit_button('Submit')
         if submitted_rating == True:
-            with open(main_dl_path+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt", "a") as f:
+            with open(ratings_file_path, "a") as f:
                 f.write(str({"outfit": ind,
                          "rating": rating})+'\n')
             st.success("Rating saved successfully for the outfit. The"+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt file is saved in "+main_dl_path)
@@ -87,7 +87,7 @@ def app():
     with st.form('Upload the current ratings file'):
         if st.form_submit_button('Upload Files'):
             s3 = boto3.client('s3')
-            s3.upload_file(main_dl_path+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt", "pog-dataset", ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt")
+            s3.upload_file(ratings_file_path, "pog-dataset", ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt")
             st.success('File uploaded successfully.')
 
     with st.form('Download the ratings.txt file from the bucket'):
@@ -95,7 +95,7 @@ def app():
             s3 = boto3.resource('s3')
 
             try:
-                s3.Bucket('pog-dataset').download_file(ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt", main_dl_path+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt")
+                s3.Bucket('pog-dataset').download_file(ratings_file_path, main_dl_path+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt")
                 st.success(ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt"+" downloaded to Downloads successfully")
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == "404":
