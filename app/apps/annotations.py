@@ -70,12 +70,8 @@ def app():
     #THIRD COLUMN: FOR TAGS
     tags_temp_list = []
     count = 0
-    #st.write(list(data[category][index]))
     with st.form('Attributes and tags'):
         for attribute in data[category][index]:
-            #st.write(list(data[category][index][attribute]))
-            #attributes_and_col.write(" ")
-            #attributes_and_col.write(attribute)
             options = list(data[category][index][attribute])[:-2]
             if count < 7: #write in column 2
                 tag = attributes_and_tags_col1.selectbox(attribute, options, key=str(count))
@@ -102,11 +98,11 @@ def app():
             st.write(final_result)
             #image_filename = "xyz" #later find a way to get image filename
             j_filename = image_filename + ".json"
-            with open('annotations.txt', 'a') as f:
+            with open('/content/drive/MyDrive/annotations.txt', 'a') as f:
                 f.write(str({j_filename:final_result}))
                 #json.dump(final_result, f)
-
-            s3 = boto3.resource('s3')
-            s3.create_bucket(Bucket= 'pog-dataset')
-            s3.Object('pog-dataset','annotations.txt').upload_file(Filename='annotations.txt')
-            st.success("Saved annotations for the image " + image_filename + " as corresponding to " + j_filename)
+            if st.button('Upload to Bucket'):
+                s3 = boto3.resource('s3')
+                s3.create_bucket(Bucket= 'pog-dataset')
+                s3.Object('pog-dataset','annotations.txt').upload_file(Filename='annotations.txt')
+                st.success("Saved annotations for the image " + image_filename + " as corresponding to " + j_filename)
