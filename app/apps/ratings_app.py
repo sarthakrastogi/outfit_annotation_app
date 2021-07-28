@@ -38,6 +38,8 @@ def app():
     col0, col1, col2, col3 = st.beta_columns(4)
     col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
     ind = col0.number_input('Index of outfit', step=1)
+    #with open('/content/drive/MyDrive/rated_outfits_list.txt', 'r') as f:
+        
 
     path = os.path.join(path, str(ind))
     print(os.getcwd())
@@ -55,13 +57,13 @@ def app():
             p = Image.open(os.path.join(path, images[i]))
             if i%3 == 0:
                 col1.image(p)
-                col1.write(1)
+                #col1.write(1)
             if i%3 == 1:
                 col2.image(p)
-                col2.write(2)
+                #col2.write(2)
             if i%3 == 2:
                 col3.image(p)
-                col3.write(3)
+                #col3.write(3)
 
         except UnidentifiedImageError:
             pass
