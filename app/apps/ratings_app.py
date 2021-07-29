@@ -43,7 +43,20 @@ def app():
 
     #outfits_list = [x[0] for x in os.walk(path)]
     col0, col1, col2, col3 = st.beta_columns(4)
-    col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
+    try:
+        col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
+    except UnboundLocalError:
+        st.header('Submit the neceessary details and press the "Start annotating" button.')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        st.header('---')
+        #return
     ind = col0.number_input('Outfit number', step=1)
     #ind = col0.
     #with open('/content/drive/MyDrive/rated_outfits_list.txt', 'r') as f:
