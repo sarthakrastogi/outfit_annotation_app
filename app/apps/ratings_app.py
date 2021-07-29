@@ -47,15 +47,8 @@ def app():
         col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
     except UnboundLocalError:
         st.header('Submit the neceessary details and press the "Start annotating" button.')
-        st.header('---')
-        st.header('---')
-        st.header('---')
-        st.header('---')
-        st.header('---')
-        st.header('---')
-        st.header('---')
-        st.header('---')
-        st.header('---')
+        st.markdown('---')
+        st.markdown('---')
         #return
     ind = col0.number_input('Outfit number', step=1)
     #ind = col0.
