@@ -5,6 +5,7 @@ from PIL import UnidentifiedImageError
 import os
 import glob
 import PIL
+import ast
 
 #docker run -t -i -v C:\\Users\\hp\\Downloads\\:app\data
 
@@ -29,26 +30,26 @@ def app():
             outfit_types_list = ["dress", "jeans-top"]
             outfit_type = st.selectbox('Type of outfit', outfit_types_list)
             submitted_outfit_type = st.form_submit_button('Submit')
+            
+        with st.form('Load indices'):
+            if st.form_submit_button('Start annotating'):
+                path = os.path.join(main_path, brand, outfit_type)
+                outfits = os.listdir(path)
+                with open('/content/drive/MyDrive/_Ballantynes_dress_ratings.txt') as f:
+                  content = f.readlines()
+                  content = [x.strip() for x in content]
+                  rated_outfits = [str(ast.literal_eval(i)["outfit"]) for i in content]
+                  outfits_list = [x for x in outfits if x not in rated_outfits]
 
-    path = os.path.join(main_path, brand, outfit_type)
-    #st.write(path)
-
-
-    outfits_list = [x[0] for x in os.walk(path)]
+    #outfits_list = [x[0] for x in os.walk(path)]
     col0, col1, col2, col3 = st.beta_columns(4)
     col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
-    ind = col0.number_input('Index of outfit', step=1)
+    ind = col0.number_input('Outfit number', step=1)
+    #ind = col0.
     #with open('/content/drive/MyDrive/rated_outfits_list.txt', 'r') as f:
         
-
-    path = os.path.join(path, str(ind))
-    print(os.getcwd())
-    for (root,dirs,files) in os.walk(os.getcwd(), topdown=True):
-        print(root)
-        print(dirs)
-        print(files)
-        print('--------------------------------')
-
+    true_ind = outfits_list[ind]
+    path = os.path.join(path, str(true_ind))
     #images = glob.glob(path + '\*')
     images = os.listdir(path)
     st.write(images)
@@ -82,7 +83,7 @@ def app():
         submitted_rating = st.form_submit_button('Submit')
         if submitted_rating == True:
             with open(ratings_file_path, "a") as f:
-                f.write(str({"outfit": ind,
+                f.write(str({"outfit": true_ind,
                          "rating": rating})+'\n')
             st.success("Rating saved successfully for the outfit. The"+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt file is saved in "+main_dl_path)
 
