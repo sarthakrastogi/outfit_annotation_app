@@ -95,7 +95,7 @@ def app():
             st.write(final_result)
             j_filename = image_filename + ".json"
             with open('/content/drive/MyDrive/annotations.txt', 'a') as f:
-                f.write(str({j_filename:final_result}))
+                f.write(str({j_filename:final_result})+'\n')
                 st.success('Annotations for '+ j_filename + ' have been saved successfully in MyDrive/annotations.txt')
             #if st.button('Upload to Bucket'):
                 #s3 = boto3.resource('s3')
