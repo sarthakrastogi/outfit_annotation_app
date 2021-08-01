@@ -46,7 +46,9 @@ def app():
     try:
         col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
     except UnboundLocalError:
-        st.markdown("""# 1. In the left sidebar, submit your name,
+        st.markdown("""# Steps to start:
+        
+                    1. In the left sidebar, submit your name,
                     
                     2. the brand,
                     
