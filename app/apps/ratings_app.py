@@ -46,7 +46,13 @@ def app():
     try:
         col0.write("Pick outfit number from 0 to "+str(len(outfits_list)))
     except UnboundLocalError:
-        st.header('Submit the neceessary details and press the "Start annotating" button.')
+        st.markdown("""# 1. In the left sidebar, submit your name,
+                    
+                    2. the brand,
+                    
+                    3. and the outfit type.
+                    
+                    4. Then press the 'Start annotating' button.""")
         st.markdown('---')
         st.markdown('---')
         #return
