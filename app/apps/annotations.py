@@ -97,6 +97,11 @@ def app():
             with open('/content/drive/MyDrive/annotations.txt', 'a') as f:
                 f.write(str({j_filename:final_result})+'\n')
                 st.success('Annotations for '+ j_filename + ' have been saved successfully in MyDrive/annotations.txt')
+                
+    if st.button('Corrupted or invalid image'):
+        with open('/content/drive/MyDrive/annotations.txt', 'a') as f:
+            f.write(str({j_filename:'invalid_img'})+'\n')
+            st.success('The product '+ j_filename + ' has been marked as invalid in MyDrive/annotations.txt')
             #if st.button('Upload to Bucket'):
                 #s3 = boto3.resource('s3')
                 #s3.create_bucket(Bucket= 'pog-dataset')
