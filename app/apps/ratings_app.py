@@ -93,7 +93,7 @@ def app():
     ratings_file_path = main_dl_path+"/"+ann_name+"_"+brand+"_"+outfit_type+"_ratings.txt"
     with st.form('Rate this outfit out of 10:'):
         outfit_types_list = ["Dress", "Jeans-top"]
-        rating = col0.selectbox("Rating", list(range(1, 6))+['Corrupted outfit'])
+        rating = col0.selectbox("Rating", range(1, 6))
         submitted_rating = st.form_submit_button('Submit')
         if submitted_rating == True:
             with open(ratings_file_path, "a") as f:
