@@ -1,4 +1,4 @@
 # Outfit Annotation App
 
 ## Usage:
-Documentation - Annotations app usage.pdf
+[app_usage.pdf](app_usage.pdf)
